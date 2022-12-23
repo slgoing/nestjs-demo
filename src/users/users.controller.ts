@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Request, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Request, Body, Param, Headers } from '@nestjs/common';
 import { UsersService } from "./users.service";
 
 @Controller('users')
@@ -23,8 +23,8 @@ export class UsersController {
   // findUser(@Request() req):any {
   //   return this.usersService.findUser(parseInt(req.params.id))
   // }
-  findUser(@Param() param):any {
-    console.log(param);
+  findUser(@Param() param, @Headers() header):any {
+    // console.log(header);
     return this.usersService.findUser(parseInt(param.id))
   }
 }

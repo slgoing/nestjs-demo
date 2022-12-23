@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Request, Body  } from '@nestjs/common';
+import { Controller, Get, Post, Request, Body, Param } from '@nestjs/common';
 import { UsersService } from "./users.service";
 
 @Controller('users')
@@ -19,9 +19,12 @@ export class UsersController {
     return this.usersService.addName()
   }
 
-  @Get('/findUser')
-  findUser(@Request() req):any {
-    console.log(req.query.id)
-    return this.usersService.findUser(parseInt(req.query.id))
+  @Get('/findUser/:id')
+  // findUser(@Request() req):any {
+  //   return this.usersService.findUser(parseInt(req.params.id))
+  // }
+  findUser(@Param() param):any {
+    console.log(param);
+    return this.usersService.findUser(parseInt(param.id))
   }
 }

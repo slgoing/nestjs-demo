@@ -1,9 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
 @Module({
   imports:[ TypeOrmModule.forRoot({
     type:'mysql',           // 数据库类型
@@ -14,9 +11,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     database:'',     // 连接的表名
     retryDelay:500,         // 重试连接数据库间隔
     retryAttempts:10,       // 允许重连次数
-  })],
-  controllers: [AppController],
-  providers: [AppService],
+    synchronize:true,       // 是否将实体同步到数据库
+    autoLoadEntities:true,  // 自动加载实体配置，forFeature()注册的每个实体都自己动加载
+  }),
+    UsersModule
+  ],
+  controllers: [],
+  providers: [],
 
 })
 export class AppModule {}

@@ -4,20 +4,24 @@ import { UsersService } from "./users.service";
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
-  @Get()
+  @Get('/findAll')
   getUsers() {
     return this.usersService.getUsers()
   }
 
   @Post('/addUser')
   addUser(@Request() req):any {
-    console.log(req.body)
     return this.usersService.addUser()
   }
 
   @Post('/addName')
   addName(@Body() body):any {
-    console.log(body)
     return this.usersService.addName()
+  }
+
+  @Get('/findUser')
+  findUser(@Request() req):any {
+    console.log(req.query.id)
+    return this.usersService.findUser(parseInt(req.query.id))
   }
 }

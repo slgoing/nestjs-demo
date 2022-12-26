@@ -1,19 +1,23 @@
-
-import {Entity , Column ,PrimaryGeneratedColumn} from 'typeorm'
-import {TypeOrmModule} from '@nestjs/typeorm'
+import {Entity , Column ,PrimaryGeneratedColumn, CreateDateColumn, Generated} from 'typeorm'
 
 @Entity()
-export class Girl{
+export class Users{
 
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id:number
 
-  @Column()
-  name:string
+  @Column({type:"varchar",length:255})
+  username:string
 
-  @Column()
+  @Column({type:"int"})
   age:number
 
-  @Column()
+  @Column({type:"varchar"})
   skill:string
+
+  @CreateDateColumn({type:"timestamp"})
+  entryTime:Date
+
+  @Generated('uuid')
+  uuid:string
 }

@@ -1,7 +1,12 @@
 import { Injectable } from "@nestjs/common";
+import { Repository} from 'typeorm'
+import {InjectRepository}from '@nestjs/typeorm'
+import { Users } from './entities/user.entity'
 
 @Injectable()
 export class UsersService {
+  constructor(@InjectRepository(Users) private readonly User:Repository<Users>) {}
+
   getUsers(): any{
     return{
       code: 200,
@@ -10,11 +15,11 @@ export class UsersService {
     }
   }
   addUser(){
-    return {
-      code: 200,
-      data: {id:1,name:'大梨',age:27},
-      msg: '用户 添加成功'
-    };
+    const data = new Users()
+    data.username='大梨';
+    data.age=25;
+    data.skill='精油按摩,日式按摩';
+    return this.User.save(data);
   }
   addName(){
     return {

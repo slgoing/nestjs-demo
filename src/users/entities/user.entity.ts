@@ -3,7 +3,7 @@ import {Entity , Column ,PrimaryGeneratedColumn, CreateDateColumn, Generated} fr
 @Entity()
 export class Users{
 
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn()
   id:number
 
   @Column({type:"varchar",length:255})
@@ -18,6 +18,7 @@ export class Users{
   @CreateDateColumn({type:"timestamp"})
   entryTime:Date
 
+  @Column()
   @Generated('uuid')
   uuid:string
 }

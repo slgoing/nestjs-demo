@@ -10,21 +10,17 @@ export class UsersController {
   }
 
   @Post('/addUser')
-  addUser(@Request() req):any {
-    return this.usersService.addUser()
+  addUser(@Body() body):any {
+    return this.usersService.addUser(body)
   }
 
-  @Post('/addName')
-  addName(@Body() body):any {
-    return this.usersService.addName()
+  @Get('findUser/:name')
+  findUserName(@Param() param): any {
+    return this.usersService.getUserByName(param.name)
   }
 
-  @Get('/findUser/:id')
-  // findUser(@Request() req):any {
-  //   return this.usersService.findUser(parseInt(req.params.id))
-  // }
-  findUser(@Param() param, @Headers() header):any {
-    // console.log(header);
-    return this.usersService.findUser(parseInt(param.id))
+  @Get('deleteUser/:name')
+  deleteUser(@Param() param): any {
+    return this.usersService.delUser(param.name)
   }
 }

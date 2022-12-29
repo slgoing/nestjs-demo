@@ -23,4 +23,9 @@ export class UsersController {
   deleteUser(@Param() param): any {
     return this.usersService.delUser(param.name)
   }
+
+  @Get('updateUser/:id/:name')
+  updateUser(@Param() param): any {
+    return this.usersService.updateUser(parseInt(param.id), param.name)
+  }
 }

@@ -22,7 +22,10 @@ export class UsersService {
   // 新增用户
   addUser(data){
     if (!data.username) {
-      return {code:201, msg:'请填写姓名！'}
+      return {
+        code:201,
+        msg:'请填写姓名！'
+      }
     }
     this.User.save(data).then(res => {
       return {
@@ -36,7 +39,9 @@ export class UsersService {
     return this.User.delete(name)
   }
   // 更新一个用户
-  updateUser(){
-
+  updateUser(id: number, name: string){
+    let data = new Users()
+    data.username = name
+    return this.User.update(id, data)
   }
 }
